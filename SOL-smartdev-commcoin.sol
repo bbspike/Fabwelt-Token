@@ -703,13 +703,13 @@ contract Test6 is Context, IERC20, Ownable {
     string private _symbol = "TST6";
     uint8 private _decimals = 8;
     
-    uint256 public _taxFee = 2; // 2% redistributed among hodlers
+    uint256 public _taxFee = 1; // 1% redistributed among hodlers
     uint256 private _previousTaxFee = _taxFee;
     
-    uint256 public _liquidityFee = 2; // 2% added to liquidity 
+    uint256 public _liquidityFee = 1; // 1% added to liquidity 
     uint256 private _previousLiquidityFee = _liquidityFee;
     
-    uint256 public _teamFee = 1; // 1% team fee
+    uint256 public _teamFee = 0; // 0% team fee
     uint256 private _previousteamFee = _teamFee;
     
     uint256 public _marketingFee = 1; // 1% marketing fee
