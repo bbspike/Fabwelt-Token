@@ -1,9 +1,9 @@
 # communitycoin
 Community coin
 
- - 2% burn rate for every TX (stops at 50% of initial supply)
- - 1% tax rate for every TX (stops at 50% of initial supply)
- - 1% governance rate for every TX (stops at 50% of initial supply)
+ - 1% burn rate for every TX (stops at 50% of initial supply)
+ - 0.5% tax rate for every TX (stops at 50% of initial supply)
+ - 0.5% governance rate for every TX (stops at 50% of initial supply)
  - 0.5% max transfer rate per TX (anti whale)
 - Supply 500.000.000
 
