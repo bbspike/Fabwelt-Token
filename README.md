@@ -5,7 +5,7 @@ Community coin
  - 1% tax rate for every TX (stops at 50% of initial supply)
  - 1% governance rate for every TX (stops at 50% of initial supply)
  - 0.5% max transfer rate per TX (anti whale)
-- Supply 1.000.000.000 
+- Supply 500.000.000
 
 The governance rate is send to a wallet that can be used every 3 months by team for whatever the community votes for. Community could vote to use the funds for marketing, airdrops, development etc. Community decides and the amount in the wallet at that moment can be used for it. With this feature community can decides what the coin needs at that moment and improve it.
 
