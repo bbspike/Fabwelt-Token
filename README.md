@@ -1,2 +1,2 @@
-# communitycoin
+# community coin
 Community coin
