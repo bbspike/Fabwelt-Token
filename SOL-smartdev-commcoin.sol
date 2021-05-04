@@ -156,12 +156,12 @@ contract Testcoin is Context, IERC20, Ownable {
     address[] private _excluded;
    
     uint256 private constant MAX = ~uint256(0);
-    uint256 private _tTotal = 162 * 10**6 * 10**18;
+    uint256 private _tTotal = 500 * 10**6 * 10**18;
     uint256 private _rTotal = (MAX - (MAX % _tTotal));
     uint256 private _tFeeTotal;
-    uint256 public _taxFee = 30;
-    uint256 public _burnFee = 25;
-    uint256 public _govFee = 25;
+    uint256 public _taxFee = 20;
+    uint256 public _burnFee = 10;
+    uint256 public _govFee = 10;
     
     string private _name = "Test coin";
     string private _symbol = "TCN";
