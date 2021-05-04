@@ -1,4 +1,4 @@
-// Concept DEV COIN BBSpike
+// Concept DEV COIN BBSpike and M
 pragma solidity =0.6.12;
 // SPDX-License-Identifier: Unlicensed
 interface IERC20 {
