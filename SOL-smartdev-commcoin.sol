@@ -679,7 +679,7 @@ interface IUniswapV2Router02 is IUniswapV2Router01 {
 }
 
 
-contract Test6 is Context, IERC20, Ownable {
+contract Finaltest is Context, IERC20, Ownable {
     using SafeMath for uint256;
     using Address for address;
 
@@ -699,20 +699,20 @@ contract Test6 is Context, IERC20, Ownable {
     uint256 private _rTotal = (MAX - (MAX % _tTotal));
     uint256 private _tFeeTotal;
 
-    string private _name = "TEST6";
-    string private _symbol = "TST6";
+    string private _name = "Finaltest";
+    string private _symbol = "FTST";
     uint8 private _decimals = 8;
     
     uint256 public _taxFee = 1; // 1% redistributed among hodlers
     uint256 private _previousTaxFee = _taxFee;
     
-    uint256 public _liquidityFee = 1; // 1% added to liquidity 
+    uint256 public _liquidityFee = 1; // 0.5% added to liquidity 
     uint256 private _previousLiquidityFee = _liquidityFee;
     
-    uint256 public _teamFee = 0; // 0% team fee
+    uint256 public _teamFee = 1; // 1% team fee -TODO CHANGE ALL TO GOVERNANCE WALLET
     uint256 private _previousteamFee = _teamFee;
     
-    uint256 public _marketingFee = 1; // 1% marketing fee
+    uint256 public _marketingFee = 0; // 0% marketing fee //REMOVE ALL FROM CONTRACT FUNCTIONS
     uint256 private _previousmarketingFee = _marketingFee;
     
     
@@ -742,9 +742,9 @@ contract Test6 is Context, IERC20, Ownable {
     
     constructor () public {
         _rOwned[_msgSender()] = _rTotal;
-        _team = 0x36CE99eFe4d7d2dF1C44AC3912243f1b1FbFA273; //CHECK
-        _marketing = 0xBbd7BE71626834ebC36c983a833Ad4036A8c0BC9; //CHECK
-        IUniswapV2Router02 _uniswapV2Router = IUniswapV2Router02(0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D); //CHECK
+        _team = 0x36CE99eFe4d7d2dF1C44AC3912243f1b1FbFA273; //CHECK BEFORE DEPLOY!!!!!!!!!!!!!!!!!!
+        _marketing = 0xBbd7BE71626834ebC36c983a833Ad4036A8c0BC9; //CHECK BEFORE DEPLOY!!!!!!!!!!!!!!!!!!!!!!!
+        IUniswapV2Router02 _uniswapV2Router = IUniswapV2Router02(0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D); //CHECK BEFORE DEPLOY!!!!!!!!!!!!!!!!!!!!!!!!
         uniswapV2Pair = IUniswapV2Factory(_uniswapV2Router.factory())
             .createPair(address(this), _uniswapV2Router.WETH());
 
