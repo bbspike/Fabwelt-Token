@@ -514,8 +514,8 @@ contract NewCoinStake is Ownable {
     }
 
     constructor() {
-        stakeToken = IERC20(0); //CHECK BEFORE DEPLOY!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        router = IUniswapV2Router02(0); //CHECK BEFORE DEPLOY!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        stakeToken = IERC20(0x50D8aADCF12234916f40228587F069C24F56cda5); //CHECK BEFORE DEPLOY - must be contractdress coin!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        router = IUniswapV2Router02(0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D); //CHECK BEFORE DEPLOY - must be uniswap router!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     }
     
     receive() payable external {
