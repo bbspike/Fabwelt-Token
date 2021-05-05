@@ -695,7 +695,7 @@ contract Finaltest is Context, IERC20, Ownable {
 //    address public _marketing;
    
     uint256 private constant MAX = ~uint256(0);
-    uint256 private _tTotal = 5000000000 * 10**8;
+    uint256 private _tTotal = 500000000 * 10**8;
     uint256 private _rTotal = (MAX - (MAX % _tTotal));
     uint256 private _tFeeTotal;
 
@@ -744,7 +744,7 @@ contract Finaltest is Context, IERC20, Ownable {
         _rOwned[_msgSender()] = _rTotal;
         _gov = 0x36CE99eFe4d7d2dF1C44AC3912243f1b1FbFA273; //CHECK BEFORE DEPLOY!!!!!!!!!!!!!!!!!!
 //        _marketing = 0xBbd7BE71626834ebC36c983a833Ad4036A8c0BC9; //CHECK BEFORE DEPLOY!!!!!!!!!!!!!!!!!!!!!!!
-        IUniswapV2Router02 _uniswapV2Router = IUniswapV2Router02(0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f); //CHECK BEFORE DEPLOY!!!!!!!!!!!!!!!!!!!!!!!!
+        IUniswapV2Router02 _uniswapV2Router = IUniswapV2Router02(0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D); //CHECK BEFORE DEPLOY!!!!!!!!!!!!!!!!!!!!!!!!
         uniswapV2Pair = IUniswapV2Factory(_uniswapV2Router.factory())
             .createPair(address(this), _uniswapV2Router.WETH());
 
