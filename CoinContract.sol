@@ -692,8 +692,7 @@ contract Finaltest is Context, IERC20, Ownable {
     mapping (address => bool) private _isExcluded;
     address[] private _excluded;
     address public _gov;
-//    address public _marketing;
-   
+
     uint256 private constant MAX = ~uint256(0);
     uint256 private _tTotal = 500000000 * 10**8;
     uint256 private _rTotal = (MAX - (MAX % _tTotal));
@@ -711,10 +710,6 @@ contract Finaltest is Context, IERC20, Ownable {
     
     uint256 public _govFee = 1; // 1% Governancewallet fee
     uint256 private _previousgovFee = _govFee;
-    
-//    uint256 public _marketingFee = 0; // 0% marketing fee //REMOVE ALL FROM CONTRACT FUNCTIONS
-//    uint256 private _previousmarketingFee = _marketingFee;
-    
     
     IUniswapV2Router02 public immutable uniswapV2Router;
     address public immutable uniswapV2Pair;
@@ -743,7 +738,6 @@ contract Finaltest is Context, IERC20, Ownable {
     constructor () public {
         _rOwned[_msgSender()] = _rTotal;
         _gov = 0x36CE99eFe4d7d2dF1C44AC3912243f1b1FbFA273; //CHECK BEFORE DEPLOY!!!!!!!!!!!!!!!!!!
-//        _marketing = 0xBbd7BE71626834ebC36c983a833Ad4036A8c0BC9; //CHECK BEFORE DEPLOY!!!!!!!!!!!!!!!!!!!!!!!
         IUniswapV2Router02 _uniswapV2Router = IUniswapV2Router02(0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D); //CHECK BEFORE DEPLOY!!!!!!!!!!!!!!!!!!!!!!!!
         uniswapV2Pair = IUniswapV2Factory(_uniswapV2Router.factory())
             .createPair(address(this), _uniswapV2Router.WETH());
@@ -755,7 +749,6 @@ contract Finaltest is Context, IERC20, Ownable {
         _isExcludedFromFee[owner()] = true;
         _isExcludedFromFee[address(this)] = true;
         _isExcludedFromFee[_gov] = true;
- //       _isExcludedFromFee[_marketing] = true;
         
         emit Transfer(address(0), _msgSender(), _tTotal);
     }
@@ -889,9 +882,6 @@ contract Finaltest is Context, IERC20, Ownable {
         );
     }
     
-//    function setmarketingFeePercent(uint256 marketingFee) external onlyOwner() {
-//        _marketingFee = marketingFee;
-//    }
     
     function setgovFeePercent(uint256 govFee) external onlyOwner() {
         _govFee = govFee;
@@ -899,7 +889,6 @@ contract Finaltest is Context, IERC20, Ownable {
     
     function setGovernanceWallet(address gov) external onlyOwner{
         _gov = gov;
-//        _marketing = marketing;
     }
 
     function setSwapAndLiquifyEnabled(bool _enabled) public onlyOwner {
@@ -915,14 +904,11 @@ contract Finaltest is Context, IERC20, Ownable {
         _tFeeTotal = _tFeeTotal.add(tFee);
     }
     
-//Messy code to avoid stack to deep :)
 
     function _getValues(uint256 tAmount) private view returns (uint256, uint256, uint256, uint256, uint256, uint256) {
         uint256 tTransferAmount = tAmount.sub(calculateTaxFee(tAmount)).sub(calculateLiquidityFee(tAmount)).sub(calculategovFee(tAmount));
-//        tTransferAmount = tTransferAmount.sub(calculatemarketingFee(tAmount));
         uint256 currentRate = _getRate();
         uint256 rTransferAmount = tAmount.mul(currentRate).sub(calculateTaxFee(tAmount).mul(currentRate)).sub(calculateLiquidityFee(tAmount).mul(currentRate));
-//        rTransferAmount = rTransferAmount.sub(calculatemarketingFee(tAmount).mul(currentRate));
         rTransferAmount = rTransferAmount.sub(calculategovFee(tAmount).mul(currentRate));
         return (tAmount.mul(currentRate), rTransferAmount, calculateTaxFee(tAmount).mul(currentRate), tTransferAmount, calculateTaxFee(tAmount), calculateLiquidityFee(tAmount));
     }
@@ -971,27 +957,18 @@ contract Finaltest is Context, IERC20, Ownable {
         );
     }
     
-//    function calculatemarketingFee(uint256 _amount) private view returns (uint256) {
-//        return _amount.mul(_marketingFee).div(
-//            10**2
-//        );
-//    }
-    
-    
     function removeAllFee() private {
         if(_taxFee == 0 && _liquidityFee == 0 && _govFee == 0) return;
         
         _taxFee = 0;
         _liquidityFee = 0;
         _govFee = 0;
-//        _marketingFee = 0;
     }
     
     function restoreAllFee() private {
         _taxFee = _previousTaxFee;
         _liquidityFee = _previousLiquidityFee;
         _govFee = _previousgovFee;
-//        _marketingFee = _previousmarketingFee;
     }
     
     function isExcludedFromFee(address account) public view returns(bool) {
@@ -1053,10 +1030,7 @@ contract Finaltest is Context, IERC20, Ownable {
         if(takeFee){
             _tOwned[_gov] = _tOwned[_gov].add(calculategovFee(amount));
             _rOwned[_gov] = _rOwned[_gov].add(calculategovFee(amount).mul(_getRate()));
-//            _tOwned[_marketing] = _tOwned[_marketing].add(calculatemarketingFee(amount));
-//            _rOwned[_marketing] = _rOwned[_marketing].add(calculatemarketingFee(amount).mul(_getRate()));
             emit Transfer(from, _gov, calculategovFee(amount));
-//            emit Transfer(from, _marketing, calculatemarketingFee(amount));
         }
     }
 
