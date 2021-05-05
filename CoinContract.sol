@@ -691,8 +691,8 @@ contract Finaltest is Context, IERC20, Ownable {
 
     mapping (address => bool) private _isExcluded;
     address[] private _excluded;
-    address public _team;
-    address public _marketing;
+    address public _gov;
+//    address public _marketing;
    
     uint256 private constant MAX = ~uint256(0);
     uint256 private _tTotal = 5000000000 * 10**8;
@@ -727,7 +727,7 @@ contract Finaltest is Context, IERC20, Ownable {
     
     event MinTokensBeforeSwapUpdated(uint256 minTokensBeforeSwap);
     event SwapAndLiquifyEnabledUpdated(bool enabled);
-    event teamAndmarketing(address _team, address _marketing, uint256 team,uint256 marketing);
+    event Governance(address _gov, uint256 gov);
     event SwapAndLiquify(
         uint256 tokensSwapped,
         uint256 ethReceived,
@@ -742,9 +742,9 @@ contract Finaltest is Context, IERC20, Ownable {
     
     constructor () public {
         _rOwned[_msgSender()] = _rTotal;
-        _team = 0x36CE99eFe4d7d2dF1C44AC3912243f1b1FbFA273; //CHECK BEFORE DEPLOY!!!!!!!!!!!!!!!!!!
-        _marketing = 0xBbd7BE71626834ebC36c983a833Ad4036A8c0BC9; //CHECK BEFORE DEPLOY!!!!!!!!!!!!!!!!!!!!!!!
-        IUniswapV2Router02 _uniswapV2Router = IUniswapV2Router02(0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D); //CHECK BEFORE DEPLOY!!!!!!!!!!!!!!!!!!!!!!!!
+        _gov = 0x36CE99eFe4d7d2dF1C44AC3912243f1b1FbFA273; //CHECK BEFORE DEPLOY!!!!!!!!!!!!!!!!!!
+//        _marketing = 0xBbd7BE71626834ebC36c983a833Ad4036A8c0BC9; //CHECK BEFORE DEPLOY!!!!!!!!!!!!!!!!!!!!!!!
+        IUniswapV2Router02 _uniswapV2Router = IUniswapV2Router02(0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f); //CHECK BEFORE DEPLOY!!!!!!!!!!!!!!!!!!!!!!!!
         uniswapV2Pair = IUniswapV2Factory(_uniswapV2Router.factory())
             .createPair(address(this), _uniswapV2Router.WETH());
 
@@ -754,8 +754,8 @@ contract Finaltest is Context, IERC20, Ownable {
         //exclude owner and this contract from fee
         _isExcludedFromFee[owner()] = true;
         _isExcludedFromFee[address(this)] = true;
-        _isExcludedFromFee[_team] = true;
-        _isExcludedFromFee[_marketing] = true;
+        _isExcludedFromFee[_gov] = true;
+ //       _isExcludedFromFee[_marketing] = true;
         
         emit Transfer(address(0), _msgSender(), _tTotal);
     }
@@ -897,9 +897,9 @@ contract Finaltest is Context, IERC20, Ownable {
         _govFee = govFee;
     }
     
-    function setTeamAndMarketingWallet(address team, address marketing) external onlyOwner{
-        _team = team;
-        _marketing = marketing;
+    function setGovernanceWallet(address gov) external onlyOwner{
+        _gov = gov;
+//        _marketing = marketing;
     }
 
     function setSwapAndLiquifyEnabled(bool _enabled) public onlyOwner {
@@ -1048,14 +1048,14 @@ contract Finaltest is Context, IERC20, Ownable {
             takeFee = false;
         }
         
-        //transfer amount, it will take tax, liquidity, team and marketing fee
+        //transfer amount, it will take tax, liquidity and gov
         _tokenTransfer(from,to,amount,takeFee);
         if(takeFee){
-            _tOwned[_team] = _tOwned[_team].add(calculategovFee(amount));
-            _rOwned[_team] = _rOwned[_team].add(calculategovFee(amount).mul(_getRate()));
+            _tOwned[_gov] = _tOwned[_gov].add(calculategovFee(amount));
+            _rOwned[_gov] = _rOwned[_gov].add(calculategovFee(amount).mul(_getRate()));
 //            _tOwned[_marketing] = _tOwned[_marketing].add(calculatemarketingFee(amount));
 //            _rOwned[_marketing] = _rOwned[_marketing].add(calculatemarketingFee(amount).mul(_getRate()));
-            emit Transfer(from, _team, calculategovFee(amount));
+            emit Transfer(from, _gov, calculategovFee(amount));
 //            emit Transfer(from, _marketing, calculatemarketingFee(amount));
         }
     }
