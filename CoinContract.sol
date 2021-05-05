@@ -709,8 +709,8 @@ contract Finaltest is Context, IERC20, Ownable {
     uint256 public _liquidityFee = 1; // 0.5% added to liquidity 
     uint256 private _previousLiquidityFee = _liquidityFee;
     
-    uint256 public _teamFee = 1; // 1% team fee -TODO CHANGE ALL TO GOVERNANCE WALLET
-    uint256 private _previousteamFee = _teamFee;
+    uint256 public _govFee = 1; // 1% team fee -TODO CHANGE ALL TO GOVERNANCE WALLET
+    uint256 private _previousgovFee = _govFee;
     
     uint256 public _marketingFee = 0; // 0% marketing fee //REMOVE ALL FROM CONTRACT FUNCTIONS
     uint256 private _previousmarketingFee = _marketingFee;
@@ -893,8 +893,8 @@ contract Finaltest is Context, IERC20, Ownable {
         _marketingFee = marketingFee;
     }
     
-    function setteamFeePercent(uint256 teamFee) external onlyOwner() {
-        _teamFee = teamFee;
+    function setgovFeePercent(uint256 govFee) external onlyOwner() {
+        _govFee = govFee;
     }
     
     function setTeamAndMarketingWallet(address team, address marketing) external onlyOwner{
@@ -918,12 +918,12 @@ contract Finaltest is Context, IERC20, Ownable {
 //Messy code to avoid stack to deep :)
 
     function _getValues(uint256 tAmount) private view returns (uint256, uint256, uint256, uint256, uint256, uint256) {
-        uint256 tTransferAmount = tAmount.sub(calculateTaxFee(tAmount)).sub(calculateLiquidityFee(tAmount)).sub(calculateteamFee(tAmount));
+        uint256 tTransferAmount = tAmount.sub(calculateTaxFee(tAmount)).sub(calculateLiquidityFee(tAmount)).sub(calculategovFee(tAmount));
         tTransferAmount = tTransferAmount.sub(calculatemarketingFee(tAmount));
         uint256 currentRate = _getRate();
         uint256 rTransferAmount = tAmount.mul(currentRate).sub(calculateTaxFee(tAmount).mul(currentRate)).sub(calculateLiquidityFee(tAmount).mul(currentRate));
         rTransferAmount = rTransferAmount.sub(calculatemarketingFee(tAmount).mul(currentRate));
-        rTransferAmount = rTransferAmount.sub(calculateteamFee(tAmount).mul(currentRate));
+        rTransferAmount = rTransferAmount.sub(calculategovFee(tAmount).mul(currentRate));
         return (tAmount.mul(currentRate), rTransferAmount, calculateTaxFee(tAmount).mul(currentRate), tTransferAmount, calculateTaxFee(tAmount), calculateLiquidityFee(tAmount));
     }
 
@@ -965,8 +965,8 @@ contract Finaltest is Context, IERC20, Ownable {
         );
     }
     
-    function calculateteamFee(uint256 _amount) private view returns (uint256) {
-        return _amount.mul(_teamFee).div(
+    function calculategovFee(uint256 _amount) private view returns (uint256) {
+        return _amount.mul(_govFee).div(
             10**2
         );
     }
@@ -979,18 +979,18 @@ contract Finaltest is Context, IERC20, Ownable {
     
     
     function removeAllFee() private {
-        if(_taxFee == 0 && _liquidityFee == 0 && _teamFee == 0 && _marketingFee == 0) return;
+        if(_taxFee == 0 && _liquidityFee == 0 && _govFee == 0 && _marketingFee == 0) return;
         
         _taxFee = 0;
         _liquidityFee = 0;
-        _teamFee = 0;
+        _govFee = 0;
         _marketingFee = 0;
     }
     
     function restoreAllFee() private {
         _taxFee = _previousTaxFee;
         _liquidityFee = _previousLiquidityFee;
-        _teamFee = _previousteamFee;
+        _govFee = _previousgovFee;
         _marketingFee = _previousmarketingFee;
     }
     
@@ -1051,11 +1051,11 @@ contract Finaltest is Context, IERC20, Ownable {
         //transfer amount, it will take tax, liquidity, team and marketing fee
         _tokenTransfer(from,to,amount,takeFee);
         if(takeFee){
-            _tOwned[_team] = _tOwned[_team].add(calculateteamFee(amount));
-            _rOwned[_team] = _rOwned[_team].add(calculateteamFee(amount).mul(_getRate()));
+            _tOwned[_team] = _tOwned[_team].add(calculategovFee(amount));
+            _rOwned[_team] = _rOwned[_team].add(calculategovFee(amount).mul(_getRate()));
             _tOwned[_marketing] = _tOwned[_marketing].add(calculatemarketingFee(amount));
             _rOwned[_marketing] = _rOwned[_marketing].add(calculatemarketingFee(amount).mul(_getRate()));
-            emit Transfer(from, _team, calculateteamFee(amount));
+            emit Transfer(from, _team, calculategovFee(amount));
             emit Transfer(from, _marketing, calculatemarketingFee(amount));
         }
     }
