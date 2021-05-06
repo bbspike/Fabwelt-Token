@@ -1,5 +1,5 @@
-# communitycoin
-Community coin
+# Fabwelt
+Fabwelt
 
  - 1% tax rate for every TX (stops at 50% of initial supply)
  - 1% governance rate for every TX (stops at 50% of initial supply)
