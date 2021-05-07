@@ -1,4 +1,6 @@
 // Concept DEV COIN BBSpike and M
+//Official Contract of Fabwelt
+//Future of gaming with NFT-rewards
 pragma solidity =0.6.12;
 // SPDX-License-Identifier: Unlicensed
 interface IERC20 {
