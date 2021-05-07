@@ -19,3 +19,5 @@ For future stages there where some ideas that need more development and time. Bu
 
  - Game industry: An app is created for users to hold the coins, which would be in a form of wallet. Using those coins, players can decide and have a say in the structure of the games, rules, governance etc etc.
 A fantasy app which would run on blockchain.
+
+- Gaming Nft marketplace: A marketplace where holders can buy and sell gaming nfts to each other using Fabwelt as the base currency of exchange.
