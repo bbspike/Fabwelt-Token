@@ -682,7 +682,7 @@ interface IUniswapV2Router02 is IUniswapV2Router01 {
 }
 
 
-contract FabweltToken is Context, IERC20, Ownable {
+contract Fabwelttoken is Context, IERC20, Ownable {
     using SafeMath for uint256;
     using Address for address;
 
@@ -702,13 +702,13 @@ contract FabweltToken is Context, IERC20, Ownable {
     uint256 private _tFeeTotal;
 
     string private _name = "FabweltToken";
-    string private _symbol = "FWT";
+    string private _symbol = "FWLT";
     uint8 private _decimals = 8;
     
     uint256 public _taxFee = 1; // 1% redistributed among hodlers
     uint256 private _previousTaxFee = _taxFee;
     
-    uint256 public _liquidityFee = 1; // 0.5% added to liquidity 
+    uint256 public _liquidityFee = 1; // 1% added to liquidity 
     uint256 private _previousLiquidityFee = _liquidityFee;
     
     uint256 public _govFee = 1; // 1% Governancewallet fee
@@ -740,7 +740,7 @@ contract FabweltToken is Context, IERC20, Ownable {
     
     constructor () public {
         _rOwned[_msgSender()] = _rTotal;
-        _gov = 0x36CE99eFe4d7d2dF1C44AC3912243f1b1FbFA273; //CHECK BEFORE DEPLOY!!!!!!!!!!!!!!!!!!
+        _gov = 0x396FBa848F8b805C024Eb3E0d714B56609488027; //CHECK BEFORE DEPLOY!!!!!!!!!!!!!!!!!!
         IUniswapV2Router02 _uniswapV2Router = IUniswapV2Router02(0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D); //CHECK BEFORE DEPLOY!!!!!!!!!!!!!!!!!!!!!!!!
         uniswapV2Pair = IUniswapV2Factory(_uniswapV2Router.factory())
             .createPair(address(this), _uniswapV2Router.WETH());
