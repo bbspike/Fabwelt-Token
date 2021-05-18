@@ -11,7 +11,7 @@ The governance rate is send to a wallet that can be used every 3 months by team 
 
 At launch a stakecontract will be Implemented. The first use case would be staking the coin.
 
-Next use case will be airdropping high quality NFT's to stakers of the coin. Stakers choose if they want to use there stake reward to receive NFT's or use there rewards like regular. With this use case we provide incentive for NFT enthousiast or regular APY stakers. NFT's theme's could Epic Rugs:).
+Next use case will be airdropping high quality NFT's to stakers of the coin. Stakers choose if they want to use there stake reward to receive NFT's or use there rewards like regular. With this use case we provide incentive for NFT enthousiast or regular APY stakers. 
 
 Above idea is what we can deploy short term and like to move forward with.
 
