@@ -1,6 +1,6 @@
 // Concept DEV COIN BBSpike and M
 // Official NFT market Contract of Fabwelt
-// Future of gaming with NFT-rewards
+// Future of gaming with in-game NFT tech
 
 pragma solidity ^0.5.7;
 
