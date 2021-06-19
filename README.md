@@ -34,3 +34,6 @@ Tokenomics for Fabwelt are:
 • 25 Million FWLT token will be reserved for development and marketing
 
 • 20 Million FWLT tokens will be reserved for bounty programs
+
+Website:      www.fabwelt.com
+Whitepaper:   www.fabwelt.com/public/Fabwelt-whitepaper.pdf
