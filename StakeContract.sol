@@ -1,7 +1,7 @@
 // Concept DEV COIN BBSpike and M
 // SPDX-License-Identifier: MIT
 // Official Staking Contract of Fabwelt
-// Future of gaming with NFT-rewards
+// Future of gaming with in-game NFT tech
 
 pragma solidity 0.7.6;
 
